@@ -1,2 +1,2 @@
 # Tetris
-Tetris game written ob JS
+Tetris game written on JavaScript
