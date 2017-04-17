@@ -36,7 +36,7 @@ function createMatrix(w,h) {
 function draw() {
 	context.fillStyle = '#000';
 	context.fillRect(0, 0, canvas.width, canvas.height);
-
+	drawMatrix(arena, {x: 0, y: 0})
 	drawMatrix(player.matrix, player.pos);
 }
 
@@ -56,7 +56,7 @@ function merge(arena, player) {
 	player.matrix.forEach((row, y) => {
 		row.forEach((value, x) => {
 			if (value !== 0) {
-				arena[y = player.pos.y][x + player.pos.x] = value;
+				arena[y + player.pos.y][x + player.pos.x] = value;
 			}
 		});
 	});
@@ -70,6 +70,13 @@ function playerDrop() {
 		player.pos.y = 0;
 	}
 	dropCounter = 0;	
+}
+
+function playerMove(dir) {
+	player.pos.x += dir;
+	if (collide(arena, player)) {
+		player.pos.x -= dir;
+	}
 }
 
 let dropCounter = 0;
@@ -99,10 +106,10 @@ const player = {
 
 document.addEventListener('keydown', event => {
 	if (event.keyCode === 37) {
-		player.pos.x--;
+		playerMove(-1);
 	} 
 	else if (event.keyCode === 39) {
-		player.pos.x++;
+		playerMove(1);
 	}
 	else if (event.keyCode === 40) {
 		playerDrop();
