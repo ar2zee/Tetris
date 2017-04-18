@@ -3,9 +3,18 @@ const context = canvas.getContext('2d');
 
 context.scale(20, 20);
 
-
-
-
+function arenaSweep() {
+	 outer: for (let y = arena.length - 1; y > 0; --y) {
+		for (let x = 0; x < arena[y].length; ++x) {
+			if (arena[y][x] === 0) {
+				continue outer;
+			}
+		}
+		const row = arena.splice(y, 1)[0].fill(0);
+		arena.unshift(row);
+		++y;
+	}
+}
 
 function collide(arena, player) {
 	const [m, o] = [player.matrix, player.pos];
@@ -111,6 +120,7 @@ function playerDrop() {
 		player.pos.y--;
 		merge(arena, player);
 		playerReset(); 
+		arenaSweep();
 	}
 	dropCounter = 0;	
 }
@@ -193,7 +203,7 @@ const colors = [
 	'#D0C91F',
 	'#00C8F8',
 	'#DE4D4E',
-	'#260126',
+	'#FA6900',
 ];
 
 const arena = createMatrix(12, 20);
