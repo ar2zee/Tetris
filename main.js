@@ -48,9 +48,15 @@ function updateScore() {
 	document.getElementById('score').innerText = tetris.player.score;
 }
 
+const playerElements = document.querySelectorAll('.player');
+[...playerElements].forEach(element => {
 
-const canvas = document.getElementById('tetris');
-const tetris = new Tetris(canvas);
+	const canvas = element.querySelector('canvas');
+	const tetris = new Tetris(canvas);
+
+});
+
+
 
 document.addEventListener('keydown', event => {
 	const player = tetris.player;
