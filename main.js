@@ -44,17 +44,12 @@ function createPiece(type) {
 	} 
 }
 
-function updateScore() {
-	// document.getElementById('score').innerText = tetris.player.score;
-}
-
  const tetri = [];
 
 const playerElements = document.querySelectorAll('.player');
 [...playerElements].forEach(element => {
 
-	const canvas = element.querySelector('canvas');
-	const tetris = new Tetris(canvas);
+	const tetris = new Tetris(element);
 	tetri.push(tetris);
 });
 
@@ -95,5 +90,3 @@ const keyListener = (event)  => {
 document.addEventListener('keydown', keyListener);
 document.addEventListener('keyup', keyListener);
 
-
-updateScore();
